@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okul Yönetim Sistemi</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4A90E2">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Okul Yönetim">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Ana Sayfa -->
+        <div id="anasayfa" class="page">
+            <h1 class="page-title">Ana Sayfa</h1>
+            <div class="main-buttons">
+                <button class="button" onclick="navigateTo('okul-ekle')">Okul Ekle</button>
+                <button class="button" onclick="navigateTo('kriterler')">Kriterler</button>
+                <button class="button" onclick="navigateTo('sinav-olustur')">Sınav Oluştur</button>
+                <button class="button" onclick="navigateTo('sinavlarim')">Sınavlarım</button>
+                <button class="button" onclick="navigateTo('rapor-al')">Rapor Al</button>
+            </div>
+        </div>
+
+        <!-- Okul Ekle -->
+        <div id="okul-ekle" class="page hidden">
+            <button class="back-button" onclick="navigateTo('anasayfa')">← Ana Sayfaya Dön</button>
+            <h1 class="page-title">Okul ve Sınıf Yönetimi</h1>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('schools')">Okul Yönetimi</button>
+                <button class="tab" onclick="switchTab('classes')">Sınıf Yönetimi</button>
+            </div>
+
+            <!-- Okul Yönetimi -->
+            <div id="school-management" class="tab-content">
+                <div class="form-container">
+                    <h3>Yeni Okul Ekle</h3>
+                    <div class="input-group">
+                        <input type="text" id="school-name" class="text-input" placeholder="Okul adını giriniz...">
+                        <button class="add-button" onclick="addSchool()">Okul Ekle</button>
+                    </div>
+                </div>
+                <div class="list-container">
+                    <h2 class="list-title">Okullar (<span id="school-count">0</span>)</h2>
+                    <div id="schools-list" class="item-list"></div>
+                </div>
+            </div>
+
+            <!-- Sınıf Yönetimi -->
+            <div id="class-management" class="tab-content hidden">
+                <div id="class-school-selector">
+                    <p>Sınıf yönetimi için önce bir okul seçiniz.</p>
+                    <select id="selected-school" class="select-input" onchange="selectSchoolForClass()">
+                        <option value="">Okul seçiniz...</option>
+                    </select>
+                </div>
+                
+                <div id="class-manager" class="hidden">
+                    <div class="form-container">
+                        <h3>Yeni Sınıf Ekle</h3>
+                        <div class="input-group">
+                            <input type="text" id="class-name" class="text-input" placeholder="Sınıf adını giriniz (örn: 5-A, 6-B)...">
+                            <button class="add-button" onclick="addClass()">Sınıf Ekle</button>
+                        </div>
+                    </div>
+                    <div class="list-container">
+                        <h2 class="list-title">Sınıflar (<span id="class-count">0</span>)</h2>
+                        <div id="classes-list" class="item-list"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kriterler -->
+        <div id="kriterler" class="page hidden">
+            <button class="back-button" onclick="navigateTo('anasayfa')">← Ana Sayfaya Dön</button>
+            <h1 class="page-title">Kriterler</h1>
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                Kriter eklemek istediğiniz sınıfı seçiniz:
+            </p>
+            <div class="grade-buttons">
+                <button class="grade-button" onclick="navigateToGradeCriteria(5)">5. Sınıf</button>
+                <button class="grade-button" onclick="navigateToGradeCriteria(6)">6. Sınıf</button>
+                <button class="grade-button" onclick="navigateToGradeCriteria(7)">7. Sınıf</button>
+                <button class="grade-button" onclick="navigateToGradeCriteria(8)">8. Sınıf</button>
+            </div>
+        </div>
+
+        <!-- Sınıf Kriterleri -->
+        <div id="sinif-kriterleri" class="page hidden">
+            <button class="back-button" onclick="navigateTo('kriterler')">← Kriterler Sayfasına Dön</button>
+            <h1 class="page-title"><span id="criteria-grade"></span>. Sınıf Kriterleri</h1>
+            
+            <div class="form-container">
+                <h3>Yeni Kriter Ekle</h3>
+                <div class="input-group">
+                    <input type="text" id="criteria-text" class="text-input" placeholder="Kriter giriniz...">
+                    <button class="add-button" onclick="addCriteria()">Kriter Ekle</button>
+                </div>
+                <p style="font-size: 14px; color: #666; margin: 10px 0;">
+                    Bu kriterler sınav oluştururken seçilebilir olacaktır.
+                </p>
+            </div>
+
+            <div class="list-container">
+                <h2 class="list-title"><span id="criteria-grade-title"></span>. Sınıf Kriterleri (<span id="criteria-count">0</span>)</h2>
+                <div id="criteria-list" class="item-list"></div>
+            </div>
+        </div>
+
+        <!-- Sınav Oluştur -->
+        <div id="sinav-olustur" class="page hidden">
+            <button class="back-button" onclick="navigateTo('anasayfa')">← Ana Sayfaya Dön</button>
+            <h1 class="page-title">Sınav Oluştur</h1>
+            
+            <div class="form-section">
+                <h3>Sınav Bilgileri</h3>
+                <div class="input-group">
+                    <input type="text" id="exam-name" class="text-input" placeholder="Sınav adını giriniz...">
+                </div>
+                
+                <select id="exam-school" class="select-input" onchange="updateExamClasses()">
+                    <option value="">Okul seçiniz...</option>
+                </select>
+                
+                <select id="exam-semester" class="select-input">
+                    <option value="">Dönem seçiniz...</option>
+                    <option value="1">1. DÖNEM</option>
+                    <option value="2">2. DÖNEM</option>
+                </select>
+                
+                <select id="exam-class" class="select-input" disabled>
+                    <option value="">Sınıf seçiniz...</option>
+                </select>
+                
+                <select id="exam-grade" class="select-input" onchange="updateExamCriteria()">
+                    <option value="">Sınıf seviyesi seçiniz...</option>
+                    <option value="5">5. Sınıf</option>
+                    <option value="6">6. Sınıf</option>
+                    <option value="7">7. Sınıf</option>
+                    <option value="8">8. Sınıf</option>
+                </select>
+            </div>
+
+            <div id="criteria-selection-section" class="form-section hidden">
+                <h3>Kriterler ve Son Teslim Tarihleri</h3>
+                <p>Sınavda kullanılacak kriterleri seçiniz ve her biri için son teslim tarihi belirleyiniz:</p>
+                <div id="criteria-selection" class="criteria-selection"></div>
+                <p><strong>Seçilen Kriterler:</strong> <span id="selected-criteria-count">0</span></p>
+            </div>
+
+            <div id="exam-summary" class="exam-summary hidden">
+                <h3>Sınav Özeti</h3>
+                <div id="exam-summary-content"></div>
+            </div>
+
+            <button class="button" onclick="createExam()" style="margin-top: 20px;">Sınav Oluştur</button>
+
+            <div id="exams-list-container" class="list-container hidden">
+                <h2 class="list-title">Oluşturulan Sınavlar (<span id="exams-count">0</span>)</h2>
+                <div id="exams-list" class="item-list"></div>
+            </div>
+        </div>
+
+        <!-- Sınıf Yönetimi (Öğrenci) -->
+        <div id="sinif-yonetimi" class="page hidden">
+            <button class="back-button" onclick="navigateTo('okul-ekle')">← Okul Listesine Dön</button>
+            <h1 class="page-title"><span id="student-school-name"></span> - <span id="student-class-name"></span></h1>
+            
+            <div class="form-section">
+                <h3>Tekil Öğrenci Ekle</h3>
+                <div class="input-group">
+                    <input type="text" id="student-number" class="text-input" placeholder="Öğrenci numarası...">
+                    <input type="text" id="student-name" class="text-input" placeholder="Ad Soyad...">
+                    <button class="add-button" onclick="addStudent()">Ekle</button>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Dosyadan Öğrenci Yükle</h3>
+                <p style="font-size: 14px; color: #666; margin-bottom: 10px;">
+                    Dosya formatı: Her satırda "Numara[TAB]Ad Soyad" şeklinde olmalıdır.
+                </p>
+                <div class="file-upload">
+                    <input type="file" id="student-file" accept=".txt" onchange="uploadStudentFile()" class="file-input">
+                    <p style="font-size: 12px; color: #666; margin: 5px 0;">
+                        Örnek format:<br/>
+                        101&nbsp;&nbsp;&nbsp;&nbsp;Ahmet Yılmaz<br/>
+                        102&nbsp;&nbsp;&nbsp;&nbsp;Ayşe Demir
+                    </p>
+                </div>
+            </div>
+
+            <div class="list-container">
+                <h2 class="list-title">Sınıftaki Öğrenciler (<span id="students-count">0</span>)</h2>
+                <div id="students-list" class="item-list"></div>
+            </div>
+        </div>
+
+        <!-- Sınavlarım -->
+        <div id="sinavlarim" class="page hidden">
+            <button class="back-button" onclick="navigateTo('anasayfa')">← Ana Sayfaya Dön</button>
+            <h1 class="page-title">Sınavlarım</h1>
+            
+            <div class="list-container">
+                <h2 class="list-title">Oluşturulan Sınavlar (<span id="my-exams-count">0</span>)</h2>
+                <div id="my-exams-list" class="item-list"></div>
+            </div>
+        </div>
+
+        <!-- Rapor Al -->
+        <div id="rapor-al" class="page hidden">
+            <button class="back-button" onclick="navigateTo('anasayfa')">← Ana Sayfaya Dön</button>
+            <h1 class="page-title">Rapor Al</h1>
+            
+            <div class="form-container">
+                <h3>Sınav Seçiniz</h3>
+                <select id="report-exam-select" class="select-input" onchange="updateReportPreview()">
+                    <option value="">Rapor alınacak sınavı seçiniz...</option>
+                </select>
+                
+                <div id="report-preview" class="hidden" style="margin-top: 20px;">
+                    <h3>Rapor Önizleme</h3>
+                    <div id="report-content" style="background: white; color: black; padding: 20px; border-radius: 8px; font-family: Arial, sans-serif;"></div>
+                    <button class="button" onclick="exportToWord()" style="margin-top: 20px;">Word Belgesi Olarak İndir</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sınav Puanlama -->
+        <div id="sinav-puanlama" class="page hidden">
+            <button class="back-button" onclick="navigateTo('sinavlarim')">← Sınavlarım Sayfasına Dön</button>
+            <h1 class="page-title" id="scoring-exam-title"></h1>
+            
+            <div class="scoring-container">
+                <div class="scoring-legend" style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <p><strong>Puanlama:</strong></p>
+                    <p><span style="color: #28a745;">G (Güzel):</span> 10 puan</p>
+                    <p><span style="color: #ffc107;">İYİ:</span> 15 puan</p>
+                    <p><span style="color: #dc3545;">Çİ (Çok İyi):</span> 20 puan</p>
+                </div>
+                
+                <div id="scoring-table-container"></div>
+                
+                <button class="button" onclick="saveExamScores()" style="margin-top: 20px;">Puanları Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

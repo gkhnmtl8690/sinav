@@ -1,0 +1,140 @@
+{
+  "schools": [
+    {
+      "name": "ŞEHİT SERACETTİN KILINÇ İHO",
+      "classes": [
+        {
+          "name": "6/A",
+          "students": [
+            {
+              "number": "2",
+              "name": "ALİ KEREM YÜCE",
+              "id": 1758221873837.359
+            },
+            {
+              "number": "3",
+              "name": "ALİ PAMUK",
+              "id": 1758221873837.8396
+            },
+            {
+              "number": "4",
+              "name": "AYŞE MİNA KILIÇ",
+              "id": 1758221873837.4717
+            },
+            {
+              "number": "5",
+              "name": "AZRA YİĞİT",
+              "id": 1758221873837.0352
+            },
+            {
+              "number": "12",
+              "name": "BÜNYAMİN ZEYVELİ",
+              "id": 1758221873837.6404
+            },
+            {
+              "number": "13",
+              "name": "DORUK ALP KUŞÇU",
+              "id": 1758221873837.145
+            },
+            {
+              "number": "14",
+              "name": "EYMEN YILDIRIM",
+              "id": 1758221873837.1824
+            },
+            {
+              "number": "15",
+              "name": "DUYGU TURAN",
+              "id": 1758221873837.64
+            },
+            {
+              "number": "16",
+              "name": "ELİF ŞURA TÜM",
+              "id": 1758221873837.1099
+            },
+            {
+              "number": "19",
+              "name": "ELİF RANA KAYAN",
+              "id": 1758221873837.4114
+            },
+            {
+              "number": "36",
+              "name": "KADİR GÜLEROĞLU",
+              "id": 1758221873837.4258
+            },
+            {
+              "number": "38",
+              "name": "KEREM BELER",
+              "id": 1758221873837.5757
+            },
+            {
+              "number": "44",
+              "name": "MELEK MİRAY KAYA",
+              "id": 1758221873837.751
+            },
+            {
+              "number": "113",
+              "name": "MUSTAFA ENSAR ÇETİN",
+              "id": 1758221873837.4314
+            },
+            {
+              "number": "129",
+              "name": "RAVZA NUR YAVUZ",
+              "id": 1758221873837.0059
+            },
+            {
+              "number": "135",
+              "name": "RAVZA TAMER",
+              "id": 1758221873837.806
+            },
+            {
+              "number": "146",
+              "name": "SELİM OĞUZ",
+              "id": 1758221873837.6416
+            },
+            {
+              "number": "154",
+              "name": "SILA ŞİRİN KILIÇ",
+              "id": 1758221873837.3032
+            },
+            {
+              "number": "174",
+              "name": "YAVUZ YILDIRIM",
+              "id": 1758221873837.0115
+            },
+            {
+              "number": "175",
+              "name": "YUNUS EMRE YİĞİT",
+              "id": 1758221873837.994
+            },
+            {
+              "number": "177",
+              "name": "ZEYNEP GÖKÇE YİĞİT",
+              "id": 1758221873837.2615
+            },
+            {
+              "number": "178",
+              "name": "ZEYNEP MEŞE",
+              "id": 1758221873837.3196
+            },
+            {
+              "number": "179",
+              "name": "ZEYNEP NUR BAYĞUT",
+              "id": 1758221873837.3384
+            }
+          ],
+          "id": 1758221867011
+        }
+      ],
+      "id": 1758221847283
+    }
+  ],
+  "criteriaByGrade": {
+    "5": [
+      "İstiklal Marşı'nın 2 kıtası"
+    ],
+    "6": [],
+    "7": [],
+    "8": []
+  },
+  "exams": []
+}
