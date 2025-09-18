@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.okulapp.yonetim" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Okul Yönetim Sistemi</name>
+    <description>Okul yönetimi için kapsamlı uygulama</description>
+    <author email="user@example.com" href="https://example.com">Okul Yönetim Team</author>
+    
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <icon density="hdpi" src="www/res/icon/android/drawable-hdpi-icon.png" />
+        <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
+        <icon density="xhdpi" src="www/res/icon/android/drawable-xhdpi-icon.png" />
+        <preference name="android-minSdkVersion" value="22" />
+    </platform>
+    
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="BackupWebStorage" value="cloud" />
+</widget>
