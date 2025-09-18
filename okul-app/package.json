@@ -1,4 +1,14 @@
 {
+  "name": "okul-yonetim-sistemi",
+  "version": "1.0.0",
+  "description": "Okul yönetimi için kapsamlı uygulama",
+  "scripts": {
+    "build": "cordova build android",
+    "build:release": "cordova build android --release",
+    "build:debug": "cordova build android --debug",
+    "platform:add": "cordova platform add android",
+    "prepare": "cordova prepare"
+  },
   "dependencies": {
     "cordova-android": "14.0.1"
   },

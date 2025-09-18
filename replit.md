@@ -63,3 +63,24 @@ Preferred communication style: Simple, everyday language.
 - **File System**: Node.js fs module for JSON data persistence
 - **Path Module**: For secure file path handling and static asset serving
 - **Network Status**: Browser online/offline detection for sync management
+
+## Recent Changes
+
+### GitHub Actions APK Build Setup (September 18, 2025)
+- **GitHub Integration**: Connected project with GitHub for automated builds
+- **CI/CD Workflow**: Implemented `.github/workflows/build-apk.yml` for automatic APK generation
+- **Build Configuration**: 
+  - Java 17 support for Cordova Android 14
+  - Android SDK 34 with appropriate build tools
+  - Debug and Release APK generation
+  - Automated artifact upload with 30-day retention
+  - GitHub Releases integration for main branch pushes
+- **Package Management**: Enhanced `okul-app/package.json` with build scripts
+- **Documentation**: Added comprehensive README.md with GitHub Actions usage guide
+
+### Key Features Added
+- **Automatic APK Building**: Triggered on push/PR to main/master branches
+- **Manual Build Trigger**: Available via GitHub Actions interface
+- **Multi-format Output**: Both debug and unsigned release APKs
+- **Artifact Storage**: Downloadable build artifacts with GitHub retention policy
+- **Release Management**: Automated versioning and release creation
